@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Result;
-use App\Schedule;
+use App\Models\Result;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Session;
 use Auth;

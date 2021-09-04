@@ -93,7 +93,7 @@
                     <th>Mobile</th>
                     <th>Paid</th>
 
-                    @if(\App\Schedule::ifRefund($userSchedule[0]->schedule_id)==1)
+                    @if(\App\Models\Schedule::ifRefund($userSchedule[0]->schedule_id)==1)
                     <th>Refund</th>
 @endif
                     <th>Photo</th>
@@ -137,7 +137,7 @@
 
                         {!! Form::close() !!}
                     </td>
-                    @if(\App\Schedule::ifRefund($userSchedule[0]->schedule_id)==1)
+                    @if(\App\Models\Schedule::ifRefund($userSchedule[0]->schedule_id)==1)
                     <td>
 {{--                        Refund form --}}
 
@@ -249,7 +249,7 @@
     <script>
         $('.openBtn').on('click',function(){
             var id = $(this).attr('data-id');
-            var url ="http://localhost:8000/next-exam/"+id;
+            var url ="{{url('next-exam')}}/"+id;
             $('.modal-body').load(url,function(){
                 $('#myModal').modal({show:true});
             });

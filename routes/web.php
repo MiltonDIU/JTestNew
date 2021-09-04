@@ -2,9 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\ExamLevelController;
+use App\Http\Controllers\Admin\ReligionController;
+use App\Http\Controllers\Admin\ScheduleController;
+use App\Http\Controllers\Admin\NoticeCategoryController;
+use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\ResultController;
+use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\UserActivityController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\NotifyController;
+use App\Http\Controllers\Auth\RegisterController;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +37,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//
-//Route::get('/home', 'HomeController@index');
 //
 //Route::get('/clear-cache', function() {
 //    Artisan::call('cache:clear');
@@ -26,76 +44,94 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //    Artisan::call('config:cache');
 //    return '<h1>Cache facade value cleared</h1>';
 //});
-//Route::get('/next-exam/{id}', 'Admin\\ReportController@nextExamGet');
-//Route::post('/next-exam/enrole', 'Admin\\ReportController@nextExamEnrole');
+Route::get('/next-exam/{id}', [ReportController::class, 'nextExamGet']);
+Route::post('/next-exam/{enrole}', [ReportController::class, 'nextExamEnrole']);
+
+Route::group([
+    'prefix' => Config("authorization.route-prefix"),
+    'middleware' => ['web', 'auth']],
+    function() {
+        Route::group(['middleware' => Config("authorization.middleware")], function() {
+            Route::get('/', [DashboardController::class, 'index']);
+            Route::resource('users', UsersController::class,['except'=>[ 'create', 'store', 'show']]);
+            Route::resource('roles', RolesController::class);
+            Route::resource('permissions', PermissionsController::class);
+            Route::resource('settings', SettingsController::class,['except' => [ 'destroy']]);
+            Route::resource('exam-level', ExamLevelController::class);
+            Route::resource('religion', ReligionController::class);
+            Route::resource('schedule', ScheduleController::class);
+            Route::resource('notice-category', NoticeCategoryController::class);
+            Route::resource('notice', NoticeController::class);
+            Route::resource('result', ResultController::class);
+            Route::resource('gallery-category', GalleryCategoryController::class);
+            Route::resource('gallery', GalleryController::class);
+            Route::resource('question', QuestionController::class);
+            Route::resource('contact', ContactController::class);
+            Route::resource('user-activity', UserActivityController::class);
+
+
+            //individual method
+            Route::get('/readmission', [UsersController::class,'readmission']);
+
+            Route::get('report/exam-level/{exam_id}/schedule/{id}/{alias}', [ReportController::class, 'currentExamStudentList']);
+            Route::post('student-refund', [ReportController::class, 'studentRefund']);
+
+            Route::get('student-refund', [ReportController::class, 'studentRefund']);
+            Route::get('report/exam-level/{exam_id}/schedule/{id}/{alias}/admit-and-profile', [ReportController::class, 'admitAndProfile']);
+
+            Route::get('/permissions', [PermissionsController::class, 'index']);
+            Route::post('/permissions', [PermissionsController::class, 'update']);
+            Route::post('/permissions/getSelectedRoutes', [PermissionsController::class,'getSelectedRoutes']);
+
+
+            Route::post('exam-schedule-status', [ScheduleController::class,'examScheduleStatus']);
+            Route::post('student-paid-status', [ReportController::class,'studentPaidStatus']);
+
+            Route::get('student-list-download/exam-level/{exam_id}/schedule/{id}/download', [ReportController::class,'studentListDownload']);
+
+
+            Route::get('student-list-profile/exam-level/{exam_id}/schedule/{id}/download', [ReportController::class,'studentListProfileDownload']);
+            Route::get('student-list-profile/exam-level/{exam_id}/schedule/{id}/download/{min}', [ReportController::class,'studentListProfileDownloadMinMax']);
+            Route::get('student-list-admit/exam-level/{exam_id}/schedule/{id}/download', [ReportController::class,'studentListAdmitDownload']);
+            Route::get('student-list-admit/exam-level/{exam_id}/schedule/{id}/download/{min}', [ReportController::class,'studentListAdmitDownloadMinMax']);
+            Route::get('list-of-examinees/exam-level/{exam_id}/schedule/{id}/download', [ReportController::class,'ListOfExaminees']);
+             Route::get('email-send/exam-level/{exam_id}/schedule/{id}', [ReportController::class,'emailSend']);
+            Route::post('email-send', 'Admin\\ReportController@emailSend');
+            Route::get('signature-sheet/exam-level/{exam_id}/schedule/{id}/download', [ReportController::class,'signatureSheet']);
 //
-//Route::group([
-//    'prefix' => Config("authorization.route-prefix"),
-//    'middleware' => ['web', 'auth']],
-//    function() {
-//        Route::group(['middleware' => Config("authorization.middleware")], function() {
-//            Route::resource('users', 'Admin\\UsersController', ['except' => [
-//                'create', 'store', 'show'
-//            ]]);
-//            Route::resource('roles', 'Admin\\RolesController');
-//            Route::get('/permissions', 'Admin\\PermissionsController@index');
-//            Route::post('/permissions', 'Admin\\PermissionsController@update');
-//            Route::post('/permissions/getSelectedRoutes', 'Admin\\PermissionsController@getSelectedRoutes');
-//            Route::get('/password/reset', 'Admin\\UsersController@reset');
-//            Route::resource('settings', 'Admin\\SettingsController',['except' => [ 'destroy']]);
-//            Route::resource('schedule', 'Admin\\ScheduleController');
-//            Route::get('student', 'Admin\\ScheduleController@student');
-//            Route::resource('results', 'Admin\\ResultController1');
-//            Route::resource('notice', 'Admin\\NoticeController');
-//            Route::post('exam-schedule-status', 'Admin\\ScheduleController@examScheduleStatus');
-//            Route::post('student-paid-status', 'Admin\\ReportController@studentPaidStatus');
-//            Route::post('student-refund', 'Admin\\ReportController@studentRefund');
-//            Route::get('report/exam-level/{exam_id}/schedule/{id}/{alias}', 'Admin\\ReportController@currentExamStudentList');
-//            Route::get('report/exam-level/{exam_id}/schedule/{id}/{alias}/admit-and-profile', 'Admin\\ReportController@admitAndProfile');
-//            Route::get('student-list-download/exam-level/{exam_id}/schedule/{id}/download', 'Admin\\ReportController@studentListDownload');
-//            Route::get('student-list-profile/exam-level/{exam_id}/schedule/{id}/download', 'Admin\\ReportController@studentListProfileDownload');
-//            Route::get('student-list-profile/exam-level/{exam_id}/schedule/{id}/download/{min}', 'Admin\\ReportController@studentListProfileDownloadMinMax');
-//            Route::get('student-list-admit/exam-level/{exam_id}/schedule/{id}/download', 'Admin\\ReportController@studentListAdmitDownload');
-//            Route::get('student-list-admit/exam-level/{exam_id}/schedule/{id}/download/{min}', 'Admin\\ReportController@studentListAdmitDownloadMinMax');
-//            Route::get('list-of-examinees/exam-level/{exam_id}/schedule/{id}/download', 'Admin\\ReportController@ListOfExaminees');
-//            // Route::get('email-send/exam-level/{exam_id}/schedule/{id}', 'Admin\\ReportController@emailSend');
-//            Route::post('email-send', 'Admin\\ReportController@emailSend');
-//            Route::get('signature-sheet/exam-level/{exam_id}/schedule/{id}/download', 'Admin\\ReportController@signatureSheet');
-//            Route::resource('result', 'Admin\\ResultController');
 //
-//            Route::resource('/exam-level', 'Admin\\ExamLevelController');
-//            Route::resource('/notice-category', 'Admin\\NoticeCategoryController');
-//            Route::resource('/gallery-category', 'Admin\GalleryCategoryController');
-//            Route::resource('/gallery', 'Admin\GalleryController');
-//            Route::resource('/question', 'Admin\QuestionController');
-//            Route::resource('/religion', 'Admin\\ReligionController');
-//            Route::resource('/contact', 'Admin\\ContactController');
-//            Route::get('/notify/',  'Admin\\NotifyController@notify');
-//            Route::get('/profile/{id}', 'Admin\\UserActivityController@profile');
-//            Route::get('/profile/{id}/edit', 'Admin\\UserActivityController@profileEdit');
-//            Route::get('/admit/{id}', 'Admin\\UserActivityController@admit');
+//
+//
+//
+//
+//
+//
+            Route::get('/notify/',  [NotifyController::class,'notify']);
+            Route::get('/profile/{id}', [UserActivityController::class,'profile']);
+            Route::get('/profile/{id}/edit', [UserActivityController::class,'profileEdit']);
+            Route::get('/admit/{id}', [UserActivityController::class,'admit']);
 //
 //            //admin and user common method
-//            Route::get('/readmission', 'Admin\\UsersController@readmission');
 //
-//
-//
-//
-//            Route::get('profile/{id}/exam-level/{exam_id}/schedule/{s_id}/download', 'Admin\\ReportController@profileDownload');
-//            Route::get('/profile', 'Admin\\UserActivityController@profile');
+
+            Route::get('profile/{id}/exam-level/{exam_id}/schedule/{s_id}/download', [ReportController::class,'profileDownload']);
+            Route::get('/profile', [UserActivityController::class,'profile']);
 //
 ////user profile update
-//            Route::get('/admit', 'Admin\\UserActivityController@admit');
-//            Route::resource('user-activity', 'Admin\\UserActivityController');
-//            Route::get('/password/reset', 'Admin\\UserActivityController@reset');
-//            Route::post('/reset/password', 'Admin\\UserActivityController@passwordReset');
+            Route::get('/admit', [UserActivityController::class,'admit']);
+//
+            Route::get('/password/reset', [UserActivityController::class,'reset']);
+            Route::post('/reset/password', [UserActivityController::class,'passwordReset']);
 //
 //        });
-//        Route::get('/', 'Admin\\DashboardController@index');
-//    });
-//
-//
-//Route::get('register/verify/{token}', 'Auth\RegisterController@verify');
+
+        });
+
+        Route::get('/', [DashboardController::class, 'index']);
+    });
+
+
+Route::get('register/verify/{token}', [RegisterController::class,'verify']);
 ////login with facebook
 //
 //Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
@@ -103,27 +139,33 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 //all peoples
 
-//Route::get('notice', 'HomeController@notice');
-//Route::get('notice/details/{id}/{title}', 'HomeController@noticeDetails');
-//Route::get('result', 'HomeController@result');
-//Route::get('result/details/{id}/{title}', 'HomeController@resultDetails');
-//Route::get('contact', 'HomeController@contact');
-//Route::post('checkResult', 'HomeController@checkResult');
-//Route::post('result-view', 'HomeController@resultCheck');
-//Route::get('syllabus', 'HomeController@syllabus');
-//Route::get('admit', 'HomeController@admit');
-//Route::post('admit-download', 'HomeController@admitDownload');
-//Route::get('/admit/{id}', 'Admin\\UserActivityController@admit');
-//Route::get('gallery', 'HomeController@gallery');
-//Route::get('question-answer', 'HomeController@questionAnswer');
+Route::get('/notice', [HomeController::class,'notice']);
+Route::get('/notice/details/{id}/{title}', [HomeController::class,'noticeDetails']);
+
+Route::get('result', [HomeController::class,'result']);
+Route::get('result/details/{id}/{title}', [HomeController::class,'resultDetails']);
+Route::get('contact', [HomeController::class,'contact']);
+Route::post('result-view', [HomeController::class,'resultCheck']);
+Route::post('checkResult', [HomeController::class,'checkResult']);
+
+Route::get('syllabus', [HomeController::class,'syllabus']);
+Route::get('admit', [HomeController::class,'admit']);
+Route::post('admit-download', [HomeController::class,'admitDownload']);
+
+Route::get('/admit/{id}', [UserActivityController::class,'admit']);
+Route::get('/gallery', [HomeController::class,'gallery']);
+Route::get('/question-answer', [HomeController::class,'questionAnswer']);
+
+
 //
-//Route::get('get-schedule-list','Auth\RegisterController@getScheduleList');
-//Route::get('get-schedule/{id}',function ($id){
-//    $states = DB::table("schedules")
-//        ->where("exam_level_id",$id)
-//        ->where("status",'1')
-//        ->pluck("title","id");
-//    return response()->json($states);
-//});
-//
-//Route::post('readmission', 'Admin\\ScheduleController@reAdmission');
+Route::get('get-schedule-list',[RegisterController::class,'getScheduleList']);
+Route::get('get-schedule/{id}',function ($id){
+    $states = DB::table("schedules")
+        ->where("exam_level_id",$id)
+        ->where("status",'1')
+        ->pluck("title","id");
+    return response()->json($states);
+});
+Route::post('readmission', [ScheduleController::class,'reAdmission']);
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

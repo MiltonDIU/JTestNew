@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Schedule;
-use App\UserSchedule;
-use App\ExamLevel;
+use App\Models\Schedule;
+use App\Models\UserSchedule;
+use App\Models\ExamLevel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use PDF;
@@ -58,8 +58,8 @@ return view('admin/report/ListOfExaminees',compact('studentLists'));
                     Session::flash('notification',$notification);
                     return redirect()->back();
              }
-           
-        
+
+
     }
 
     public function studentListProfileDownloadMinMax($exam_level_id, $schedule_id_id,$min){
@@ -152,7 +152,7 @@ return view('admin/report/ListOfExaminees',compact('studentLists'));
             ->orderBy('role_number', 'asc')->get();
         $schedule = Schedule::where('status',1)->first();
         $pdf = PDF::loadView('admin.report.signatureSheet',compact('schedule','studentLists','exam_level'));
-        
+
         //return view('admin.report.signatureSheet',compact('studentLists','schedule','exam_level'));
         return $pdf->setPaper('a4')->download("signature-sheet.pdf");
     }
@@ -195,7 +195,7 @@ if ($data->role_number==null){
             $tuts = $totalUserThisSchedule->count()+1;
             $data->role_number=$exam_code+$tuts;
 }
-            
+
 //end of generate roll number
             $data->status = '1';
             $data->save();
@@ -269,6 +269,10 @@ echo '<input type="hidden" name="user_schedule_id" value="'.$userSchedule->id.'"
     }
   echo '</select></div><div class="col-md-2"><button class="btn btn-primary" type="submit">Save</button></div></div></form>';
 }
+
+
+
+
 
     public function nextExamEnrole(Request $request){
 

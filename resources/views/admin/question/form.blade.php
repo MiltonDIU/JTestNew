@@ -11,7 +11,7 @@
     {!! Form::label('url', 'Select Question File', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $question->result_file or ''}}" name="question_url" onchange="this.parentNode.setAttribute('question_url', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $question->result_file ?? ''}}" name="question_url" onchange="this.parentNode.setAttribute('question_url', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
         @if ($errors->has('question_url'))
         <span class="help-block">
@@ -34,7 +34,7 @@
     {!! Form::label('url', 'Select Listening File', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $question->listening_url or ''}}" name="listening_url" onchange="this.parentNode.setAttribute('listening_url', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $question->listening_url ?? ''}}" name="listening_url" onchange="this.parentNode.setAttribute('listening_url', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
         @if ($errors->has('listening_url'))
             <span class="help-block">
@@ -57,7 +57,7 @@
     {!! Form::label('url', 'Select Answer File', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $question->listening_url or ''}}" name="answer_url" onchange="this.parentNode.setAttribute('answer_url', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $question->listening_url ?? ''}}" name="answer_url" onchange="this.parentNode.setAttribute('answer_url', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
         @if ($errors->has('answer_url'))
             <span class="help-block">

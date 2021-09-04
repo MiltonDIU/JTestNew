@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ExamLevel;
+use App\Models\ExamLevel;
 use App\Http\Requests\ScheduleRequest;
-use App\Schedule;
-use App\User;
-use App\UserSchedule;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Models\UserSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;

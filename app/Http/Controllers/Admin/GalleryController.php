@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Gallery;
-use App\GalleryCategory;
+use App\Models\Gallery;
+use App\Models\GalleryCategory;
 use App\Helpers\SettingsHelper;
 use App\Http\Requests\GalleryRequest;
 use Illuminate\Http\Request;

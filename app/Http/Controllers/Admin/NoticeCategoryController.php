@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\NoticeCategory;
+use App\Models\NoticeCategory;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
@@ -54,7 +54,7 @@ class NoticeCategoryController extends Controller
      */
     public function store(NoticeCategoryRequest $request)
     {
-        
+
         $requestData = $request->all();
         $requestData['user_id'] = Auth::id();
         NoticeCategory::create($requestData);
@@ -106,7 +106,7 @@ class NoticeCategoryController extends Controller
      */
     public function update(NoticeCategoryRequest $request, $id)
     {
-        
+
         $requestData = $request->all();
         $requestData['user_id'] = Auth::id();
         $noticecategory = NoticeCategory::findOrFail($id);

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests;
 
-use App\Permission;
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Session;
 use Route;
-use App\Role;
+use App\Models\Role;
 use App\Http\Controllers\Controller;
 class PermissionsController extends Controller
 {

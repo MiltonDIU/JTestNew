@@ -112,20 +112,30 @@
     </div>
 </div>
 @push('scripts')
-
-    <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
-
-    <script src="{{asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
     <script>
-        $('#textarea,#textarea2,#admit_message').ckeditor({
-            language:'es',
-            height :200,
-            toolbarCanCollapse : true,
-            extraPlugins : 'justify',
-        });
+        ClassicEditor
+            .create( document.querySelector( '#textarea' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#textarea2' ) )
+            .catch( error => {
+                console.error( error );
+            } );
 
+    </script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#admit_message' ) )
+            .catch( error => {
+                console.error( error );
+            } );
 
-</script>
+    </script>
 @endpush
 
 

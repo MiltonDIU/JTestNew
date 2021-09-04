@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\ExamLevel;
+use App\Models\ExamLevel;
 use Illuminate\Http\Request;
 use Auth;
 use Session;
@@ -54,9 +54,9 @@ class ExamLevelController extends Controller
      */
     public function store(ExamLevelRequest $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         ExamLevel::create($requestData);
         $notification = array(
             'message' => 'Exam Level has been  successfully created!',
@@ -105,9 +105,9 @@ class ExamLevelController extends Controller
      */
     public function update(ExamLevelRequest $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $exam_level = ExamLevel::findOrFail($id);
         $exam_level->update($requestData);
 

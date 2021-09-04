@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\ExamLevel;
-use App\Religion;
-use App\Schedule;
-use App\User;
-use App\UserSchedule;
+use App\Models\ExamLevel;
+use App\Models\Religion;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Models\UserSchedule;
 use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,7 +39,9 @@ class UserActivityController extends Controller
             $user_id = Auth::id();
         }
       $admit = UserSchedule::where('user_id',$user_id)->get()->where('status','1')->last();
+
     $pdf = PDF::loadView('admin.report.admit',['admit'=>$admit]);
+
     return  $pdf->setPaper('a4')->download("$admit->role_number.pdf");
     //return view('admin.report.admit',compact('admit'));
     }

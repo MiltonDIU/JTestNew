@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Notice;
-use App\Schedule;
-use App\Setting;
-use App\User;
-use App\UserSchedule;
+use App\Models\Notice;
+use App\Models\Schedule;
+use App\Models\Setting;
+use App\Models\User;
+use App\Models\UserSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;

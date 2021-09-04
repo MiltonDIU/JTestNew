@@ -2,35 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\ExamLevel;
-use App\Http\Requests\RegistrationRequest;
-use App\Religion;
-use App\Role;
-use App\Schedule;
-use App\Setting;
-use App\User;
+use App\Models\ExamLevel;
 use App\Http\Controllers\Controller;
-use App\UserSchedule;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use DB;
-use Mail;
-use Illuminate\Http\Request;
+use App\Http\Requests\RegistrationRequest;
 use App\Mail\EmailVerification;
-use Session;
-
+use App\Providers\RouteServiceProvider;
+use App\Models\User;
+use App\Models\Religion;
+use App\Models\Schedule;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use DB;
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
 
     use RegistersUsers;
 
@@ -72,7 +58,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array $data
-     * @return User
+     * @return \App\User
      */
     protected function create(array $data)
     {
@@ -183,5 +169,4 @@ class RegisterController extends Controller
             ->pluck("title","id");
         return response()->json($states);
     }
-
 }

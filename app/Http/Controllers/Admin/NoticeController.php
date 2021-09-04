@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NoticeRequest;
-use App\Notice;
-use App\NoticeCategory;
+use App\Models\Notice;
+use App\Models\NoticeCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\ExamLevel;
+use App\Models\ExamLevel;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 

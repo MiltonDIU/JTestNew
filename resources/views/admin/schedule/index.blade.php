@@ -96,10 +96,11 @@
 @push('scripts')
     <script type="text/javascript">
         $(document).on('click','.status',function () {
-
-
             var idea_id = $(this).data("idea_id");
             $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 method:"post",
                 url:'/admin/exam-schedule-status',
                 data:{

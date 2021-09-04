@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Religion;
+use App\Models\Religion;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReligionRequest;
 use Session;
@@ -51,9 +51,9 @@ class ReligionController extends Controller
      */
     public function store(ReligionRequest $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         Religion::create($requestData);
         $notification = array(
             'message' => 'Religion has been  successfully created!',
@@ -101,9 +101,9 @@ class ReligionController extends Controller
      */
     public function update(ReligionRequest $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
         $religion = Religion::findOrFail($id);
         $religion->update($requestData);
         $notification = array(

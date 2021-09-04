@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\ExamLevel;
+use App\Models\ExamLevel;
 use App\Http\Requests;
 
-use App\Schedule;
-use App\User;
-use App\Role;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Session;

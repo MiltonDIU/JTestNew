@@ -1,28 +1,28 @@
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     <label for="name" class="col-md-4 control-label">{{ 'Name' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="name" type="text" id="name" value="{{ $contact->name or ''}}" >
+        <input class="form-control" name="name" type="text" id="name" value="{{ $contact->name ?? ''}}" >
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
     <label for="email" class="col-md-4 control-label">{{ 'Email' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="email" type="text" id="email" value="{{ $contact->email or ''}}" >
+        <input class="form-control" name="email" type="text" id="email" value="{{ $contact->email ?? ''}}" >
         {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('mobile') ? 'has-error' : ''}}">
     <label for="mobile" class="col-md-4 control-label">{{ 'Mobile' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="mobile" type="text" id="mobile" value="{{ $contact->mobile or ''}}" >
+        <input class="form-control" name="mobile" type="text" id="mobile" value="{{ $contact->mobile ?? ''}}" >
         {!! $errors->first('mobile', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('designation') ? 'has-error' : ''}}">
     <label for="designation" class="col-md-4 control-label">{{ 'Designation' }}</label>
     <div class="col-md-6">
-        <input class="form-control" name="designation" type="text" id="designation" value="{{ $contact->designation or ''}}" >
+        <input class="form-control" name="designation" type="text" id="designation" value="{{ $contact->designation ?? ''}}" >
         {!! $errors->first('designation', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -33,7 +33,7 @@
 
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $contact->avatar or ''}}" name="avatar" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $contact->avatar ?? ''}}" name="avatar" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
     </div>
 </div>
@@ -44,14 +44,14 @@
 <div class="form-group {{ $errors->has('address') ? 'has-error' : ''}}">
     <label for="address" class="col-md-4 control-label">{{ 'Address' }}</label>
     <div class="col-md-6">
-        <textarea class="form-control" rows="5" name="address" type="textarea" id="address" >{{ $contact->address or ''}}</textarea>
+        <textarea class="form-control" rows="5" name="address" type="textarea" id="address" >{{ $contact->address ?? ''}}</textarea>
         {!! $errors->first('address', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
-        <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Create' }}">
+        <input class="btn btn-primary" type="submit" value="{{ $submitButtonText ?? 'Create' }}">
     </div>
 </div>
 

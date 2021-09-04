@@ -14,7 +14,7 @@
 
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $result->result_file or ''}}" name="result_file" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $result->result_file ?? ''}}" name="result_file" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
         @if ($errors->has('result_file'))
             <span class="help-block">
@@ -46,7 +46,7 @@
  <?php */?>
 <div class="form-group">
     <div class="col-md-offset-4 col-md-4">
-        <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Upload' }}">
+        <input class="btn btn-primary" type="submit" value="{{ $submitButtonText ??  'Upload' }}">
     </div>
 </div>
 

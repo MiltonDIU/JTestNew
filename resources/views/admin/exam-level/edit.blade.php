@@ -10,13 +10,21 @@
                         <br />
 
 
-                        <form method="POST" action="{{ url('/admin/exam-level/' . $exam_level->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            {{ csrf_field() }}
 
-                            @include ('admin.exam-level.form', ['submitButtonText' => 'Update'])
 
-                        </form>
+                        {!! Form::model($exam_level, [
+     'method' => 'PATCH',
+     'url' => ['/' . Config("authorization.route-prefix") . '/exam-level', $exam_level->id],
+     'class' => 'form-horizontal',
+     'files' => true
+ ]) !!}
+
+                        @include ('admin.exam-level.form', ['submitButtonText' => 'Update'])
+
+                        {!! Form::close() !!}
+
+
+
 
                     </div>
                 </div>

@@ -28,7 +28,7 @@
     {!! Form::label('url', 'Select Image', ['class' => 'col-md-3 control-label']) !!}
     <div class="col-md-6">
         <label class="file" title="">
-            <input type="file" value="{{ $result->result_file or ''}}" name="url" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
+            <input type="file" value="{{ $result->result_file ?? ''}}" name="url" onchange="this.parentNode.setAttribute('title', this.value.replace(/^.*[\\/]/, ''))" />
         </label>
         @if ($errors->has('url'))
         <span class="help-block">

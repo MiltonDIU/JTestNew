@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\GalleryCategory;
+use App\Models\GalleryCategory;
 use App\Http\Requests\GalleryCategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

@@ -37,7 +37,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('theme.home');
+        return view('theme2.home');
     }
     public function contact()
     {

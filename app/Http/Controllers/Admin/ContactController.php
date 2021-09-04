@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Contact;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -53,9 +53,9 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
 
         if ($request->hasFile('avatar')) {
             foreach($request['avatar'] as $file){
@@ -112,9 +112,9 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+
         $requestData = $request->all();
-        
+
 
         if ($request->hasFile('avatar')) {
             foreach($request['avatar'] as $file){
