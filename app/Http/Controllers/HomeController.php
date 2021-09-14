@@ -36,8 +36,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        return view('theme2.home');
+        $exam_levels = ExamLevel::where('status','1')->get();
+        return view('theme2.home',compact('exam_levels'));
     }
     public function contact()
     {

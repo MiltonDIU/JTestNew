@@ -25,7 +25,7 @@ class ExamLevel extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'alias', 'status','exam_level_code'];
+    protected $fillable = ['title', 'alias', 'status','exam_level_code','home_page_title','details'];
     public function user_schedule()
     {
         return $this->hasMany('App\Models\UserSchedule');

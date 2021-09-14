@@ -28,6 +28,7 @@ class SettingsHelper
         $data['meta_description']=$settings['meta_description'];
         $data['copyright']=$settings['copyright'];
         $data['content']=$settings['content'];
+        $data['test_date']=$settings['test_date'];
         $data['powered']=$settings['powered'];
         $data['signature']=$settings['signature'];
         $data['contact']=$settings['contact'];

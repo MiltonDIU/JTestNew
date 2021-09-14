@@ -40,7 +40,7 @@ class SettingsController extends Controller
      */
     public function store(SettingRequest $request)
     {
-        $requestData = $request->only('title','meta_keyword','meta_description','copyright','powered','content','contact','admit_message');
+        $requestData = $request->only('title','meta_keyword','meta_description','copyright','test_date','powered','content','contact','admit_message');
         if ($request->hasFile('logo')) {
             $uploadPath = public_path('/uploads/logo');
             $extension = $request->file('logo')->getClientOriginalExtension();
@@ -114,7 +114,7 @@ class SettingsController extends Controller
     public function update(SettingRequest $request, $id)
     {
         $settings = Setting::findOrFail($id);
-        $requestData = $request->only('title','meta_keyword','meta_description','copyright','powered','content','contact','admit_message');
+        $requestData = $request->only('title','meta_keyword','meta_description','test_date','copyright','powered','content','contact','admit_message');
         if ($request->hasFile('logo')) {
             $uploadPath = public_path('/uploads/logo');
             $extension = $request->file('logo')->getClientOriginalExtension();

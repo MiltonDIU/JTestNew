@@ -25,6 +25,24 @@
     </div>
 </div>
 
+<div class="form-group {{ $errors->has('home_page_title') ? 'has-error' : ''}}">
+    {!! Form::label('title', 'Will show inside the home page', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-6">
+        {!! Form::text('home_page_title', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('home_page_title', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+<div class="form-group {{ $errors->has('details') ? 'has-error' : ''}}">
+    {!! Form::label('content', 'Level Details', ['class' => 'col-md-4 control-label']) !!}
+    <div class="col-md-8">
+        {!! Form::textarea('details', null, ['id'=>'textarea','class' => 'form-control','rows' => '5']) !!}
+        {!! $errors->first('details', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+
+
+
 
 
 <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
@@ -67,4 +85,23 @@
             $('#title').on('change', convertName2Alias);
         });
     </script>
+
+
+    @push('scripts')
+
+        <script src="{{asset('vendor/unisharp/laravel-ckeditor/ckeditor.js')}}"></script>
+
+        <script src="{{asset('vendor/unisharp/laravel-ckeditor/adapters/jquery.js')}}"></script>
+        <script>
+            $('#textarea').ckeditor({
+                language:'es',
+                height :200,
+                toolbarCanCollapse : true,
+                extraPlugins : 'justify',
+            });
+
+
+        </script>
+    @endpush
+
 @endpush
