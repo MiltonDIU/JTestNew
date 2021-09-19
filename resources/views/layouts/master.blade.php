@@ -8,7 +8,8 @@
 
 <head>
 <meta charset="utf-8" />
-<title>{{ config('app.name', 'J-test Application') }}</title>
+    <title>{!! Settings::config()['title'] !!} </title>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -39,7 +40,7 @@
 <!-- END THEME LAYOUT STYLES -->
     <!-- custom style css-->
     <link href="{{url('assets/admin/custom/css/style.css')}}" rel="stylesheet" type="text/css" />
-<link rel="shortcut icon" href="favicon.ico" /> </head>
+<link rel="shortcut icon" href="{{url('favicon.ico')}}" /> </head>
 <!-- END HEAD -->
 <script>
     window.Laravel = <?php echo json_encode([
@@ -109,9 +110,7 @@
         <!-- END CONTENT BODY -->
     </div>
     <!-- END CONTENT -->
-    <!-- BEGIN QUICK SIDEBAR -->
-   @include('layouts.partial.quick_menu')
-    <!-- END QUICK SIDEBAR -->
+
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->

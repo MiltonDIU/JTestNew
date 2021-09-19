@@ -1,6 +1,25 @@
 @extends('theme2.master')
 @section('content')
-
+    <!-- Hero -->
+    <header class="hero">
+        <div class="overlay"></div>
+        <div class="container hero-container">
+            <div class="hero-subheading">Become a global citizen</div>
+            <div class="hero-heading text-uppercase">by learning JAPANESE</div>
+            <a class="btn btn-primary btn-md text-uppercase" href="#">SIGNUP NOW</a>
+            &nbsp;&nbsp;
+            <a
+                class="
+                btn btn-outline-primary btn-md
+                text-uppercase text-white
+                border-white
+                learn-more-btn
+              "
+                href="#"
+            >LEARN MORE</a
+            >
+        </div>
+    </header>
 
 
     <!-- Intro Section -->
@@ -13,16 +32,15 @@
             <div class="col-md-4 col-sm-5">
                 <h3>Latest News</h3>
 
-                <div id="latest-news">
+                <div class="news" id="latest-news">
                     <ul>
+                        @foreach(\App\Helpers\SettingsHelper::noticeHome() as $notice)
                         <li>
-                            <a href="#">Registration J.Test 153</a>
-                            <span>Admission, 21 June 2021</span>
+                            <a href="{{ url('notice/details/' . $notice->id.'/'.$notice->alias) }}">{{$notice->title}}</a>
+                            <span>{{$notice->notice_category->title}}, {{$notice->created_at->format('d M Y')}}</span>
                         </li>
-                        <li>
-                            <a href="#">Registration J.Test 153</a>
-                            <span>Admission, 21 June 2021</span>
-                        </li>
+
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -92,81 +110,6 @@
     <section class="page-section" id="test-date">
         <div class="container">
             {!! Settings::config()['test_date'] !!}
-
-
-
-{{--            <h3>J.Test Dates in 2021</h3>--}}
-
-{{--            <div class="table-responsive">--}}
-{{--                <table class="table table-bordered">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th>Test No.</th>--}}
-{{--                        <th>Registration Deadline</th>--}}
-{{--                        <th>Exam Date</th>--}}
-{{--                        <th colspan="3">Level</th>--}}
-{{--                        <th>Announcement of Result</th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-
-{{--                    <tbody>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
-{{--            </div>--}}
         </div>
     </section>
 
@@ -178,74 +121,6 @@
 
             <div class="table-responsive">
                 {!! $exam_level->details !!}
-{{--                <table class="table table-bordered">--}}
-{{--                    <thead>--}}
-{{--                    <tr>--}}
-{{--                        <th>Test No.</th>--}}
-{{--                        <th>Registration Deadline</th>--}}
-{{--                        <th>Exam Date</th>--}}
-{{--                        <th colspan="3">Level</th>--}}
-{{--                        <th>Announcement of Result</th>--}}
-{{--                    </tr>--}}
-{{--                    </thead>--}}
-
-{{--                    <tbody>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td>154th</td>--}}
-{{--                        <td>14.08.2021 (Monday)</td>--}}
-{{--                        <td>19.09.2021 (Sunday)</td>--}}
-{{--                        <td colspan="1">F-G</td>--}}
-{{--                        <td colspan="1">D-E</td>--}}
-{{--                        <td colspan="1">A-C</td>--}}
-{{--                        <td>28.03.2022</td>--}}
-{{--                    </tr>--}}
-{{--                    </tbody>--}}
-{{--                </table>--}}
             </div>
         </div>
     </section>
@@ -253,9 +128,32 @@
     @endforeach
 
 @endsection
-
-
-
-
-
 @include('notification.notify')
+
+@push('script')
+
+    <script>
+        var myList = document.getElementsByTagName("table");
+        for (i = 0; i < myList.length; i++) {
+            //it does work
+            myList[i].className = "table table-striped";
+        }
+        $(function(){
+            var tickerLength = $('.news ul li').length;
+            var tickerHeight = $('.news ul li').outerHeight();
+            $('.news ul li:last-child').prependTo('.news ul');
+            $('.news ul').css('marginTop',-tickerHeight);
+            function moveTop(){
+                $('.news ul').animate({
+                    top : -tickerHeight
+                },600, function(){
+                    $('.news ul li:first-child').appendTo('.news ul');
+                    $('.news ul').css('top','');
+                });
+            }
+            setInterval( function(){
+                moveTop();
+            }, 3000);
+        });
+    </script>
+@endpush

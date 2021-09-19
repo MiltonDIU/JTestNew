@@ -1,91 +1,62 @@
-@extends('theme.master')
+@extends('theme2.master')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-8 col-md-8 col-md-offset-2 ">
 
-                {!! Form::open(['url' => '/login', 'class' => 'form-horizontal',  'files' => true]) !!}
-
-                <div class="content-wrap">
-                    <article class="entry">
-                        <div class="entry-content">
-                            <div class="form-field form-field-inline{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email">E-Mail Address</label>
-
-                                <div class="field">
-                                    {!! Form::email('email', null, ['class' => 'form-control','required'=>'required']); !!}
-
-                                @if ($errors->has('email'))
-                                        <span class="help-block">
+    <section class="page-section" style="padding-top: 8rem;">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                    {!! Form::open(['url' => '/login', 'class' => 'col-sm-6 mt-4',  'files' => true]) !!}
+                    <div class="mb-3 {{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label class="col-form-label" for="email">Email Address</label>
+                        {!! Form::email('email', null, ['class' => 'form-control','required'=>'required']); !!}
+                        @if ($errors->has('email'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            </div>
+                        @endif
+                    </div>
 
-                            <div class="form-field form-field-inline{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password">Password</label>
-
-                                <div class="field">
-
-                                    {!! Form::password('password', null, ['class' => 'form-control','required'=>'required']); !!}
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
+                    <div class="mb-3 {{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label class="col-form-label" for="password">Password</label>
+                        <input class="form-control" name="password" type="password" id="password" required>
+                        @if ($errors->has('password'))
+                            <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                    @endif
-                                </div>
-                            </div>
+                        @endif
+                    </div>
 
 
-
-                            <div class="form-field form-field-inline">
-                                <div class="field">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-field form-field-inline">
-                                <label for="login">
-                                    <button type="submit" class="btn btn-primary">
-                                        Login
-                                    </button></label>
-                                <div class="field">
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        Forgot Your Password?
-                                    </a>
-                                </div>
-                            </div>
-
-
-
-
-
-
+                    <div class="d-flex mb-3">
+                        <div class="form-check me-5">
+                            <input type="checkbox" class="form-check-input"  name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <label class="form-check-label" for="remember-me">
+                                Remember Me
+                            </label>
                         </div>
-                    </article>
-                </div>
-                {!! Form::close() !!}
+                        <a href="{{ route('password.request') }}">Forgot Password?</a>
+                    </div>
 
+                    <input class="btn col-sm-12 btn-primary mb-3" type="submit" value="Login">
+
+                    <p>Don't have an account? <a href="{{url('register')}}">Register here</a></p>
+                {!! Form::close() !!}
+            </div>
         </div>
-    </div>
-</div>
+    </section>
+
+
+
 @endsection
 
 
 @push('style')
     <style>
-        .header{position: relative; background:black}
-        .main-elevated{margin-top:25px;}
-        .logo_row{padding-bottom: 30px}
-        .list-item-title{color: black; font-size: 14px}
-        .content-wrap{padding: 30px;box-shadow: 2px 2px 5px 2px #888888;}
+        #mainNav{
+            background: #212529!important;
+        }
     </style>
+
 @endpush
 
 @include('notification.notify')

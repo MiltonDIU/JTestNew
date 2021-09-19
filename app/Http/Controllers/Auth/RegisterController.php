@@ -13,8 +13,11 @@ use App\Models\Schedule;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use Session;
+use Illuminate\Support\Str;
 class RegisterController extends Controller
 {
 
@@ -69,7 +72,8 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'role_id' => 2,
             'password' => bcrypt($data['password']),
-            'email_token' => str_random(30),
+            'email_token' => Str::random(30),
+//            'email_token' => str_random(30),
         ]);
     }
 
