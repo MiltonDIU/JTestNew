@@ -10,6 +10,7 @@ namespace App\Helpers;
 use App\Models\Gallery;
 use App\Models\Notice;
 use App\Models\Schedule;
+use App\Models\Slider;
 use App\Models\User;
 use App\Models\UserSchedule;
 use DB;
@@ -63,6 +64,14 @@ class SettingsHelper
         $galleries = Gallery::orderBy('created_at', 'desc')->where('is_active',1)->take(10)->get();
         return $galleries;
     }
+
+        public static function sliders($page_name){
+        $sliders = Slider::orderBy('created_at', 'desc')->where('is_active',1)->where('page_name',$page_name)->get();
+        return $sliders;
+    }
+
+
+
 
 //create file directory
     public static function makeFilePath($path){

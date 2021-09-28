@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\UserActivityController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\NotifyController;
 use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers\Admin\SliderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -68,7 +68,7 @@ Route::group([
             Route::resource('question', QuestionController::class);
             Route::resource('contact', ContactController::class);
             Route::resource('user-activity', UserActivityController::class);
-
+            Route::resource('slider', SliderController::class);
 
             //individual method
             Route::get('/readmission', [UsersController::class,'readmission']);

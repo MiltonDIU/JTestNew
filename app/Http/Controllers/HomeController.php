@@ -14,6 +14,7 @@ use App\Models\Result;
 use App\Models\Schedule;
 use App\Models\UserSchedule;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Validator;
 use Session;
 use PDF;
@@ -42,27 +43,27 @@ class HomeController extends Controller
     public function contact()
     {
 
-        return view('theme.contact');
+        return view('theme2.contact');
     }
     public function notice(){
         $notices = Notice::where('status',1)->orderBy('created_at', 'desc')->get();
-        return view('theme.notice',compact('notices'));
+        return view('theme2.notice',compact('notices'));
     }
     public function noticeDetails($id){
         $notice = Notice::findOrFail($id);
-        $notices = Notice::where('status',1)->where('notice_category_id',1)->orderBy('created_at', 'desc')->get()->take(5);
+        $notices = Notice::where('status',1)->where('notice_category_id',$notice->notice_category_id)->orderBy('created_at', 'desc')->get()->take(5);
         $notices2 = Notice::where('status',1)->orderBy('created_at', 'desc')->get()->take(5);
-        return view('theme.noticeDetails',compact('notice','notices','notices2'));
+        return view('theme2.noticeDetails',compact('notice','notices','notices2'));
     }
 
     public function result(){
         //$result = Result::where('status',1)->orderBy('created_at', 'desc')->get();
         //return view('theme.result',compact('result'));
 
-        return view('theme.result.index');
+        return view('theme2.result.index');
     }
     public function syllabus(){
-               return view('theme.syllabus');
+               return view('theme2.syllabus');
     }
     public function resultDetails($id){
         $result = Result::findOrFail($id);
@@ -98,7 +99,7 @@ class HomeController extends Controller
 
            return redirect('result');
         }else{
-            return view('theme.result.show',compact('row'));
+            return view('theme2.result.show',compact('row'));
         }
 
     }
@@ -106,7 +107,7 @@ class HomeController extends Controller
     public function admit(){
         //$examLevel = ExamLevel::where('status','1')->get();
 //        return view('theme.admit',compact('examLevel'));
-        return view('theme.admit_card_form');
+        return view('theme2.admit_card_form');
     }
 
 
@@ -118,7 +119,7 @@ class HomeController extends Controller
         $dobDay=$request->input('dobDay');
         $date_of_birth = "$dobYear-$dobMonth-$dobDay";
         $row = Profile::where('identity',$identity)->where('dob',$date_of_birth)->first();
-        //dd($row);
+
         //$row = Profile::where('identity',$identity)->where('dob_day',$dobDay)->where('dob_month',$dobMonth)->where('dob_year',$dobYear)->where('test_year',$year)->first();
 
 
@@ -143,8 +144,8 @@ class HomeController extends Controller
             }else{
 
                 $schedule=Schedule::where('id',$admit->schedule_id)->where('admit','1')->get()->last();
-
                 if ($schedule){
+//                   Return view('admin.report.admit',['admit'=>$admit]);
                     $pdf = PDF::loadView('admin.report.admit',['admit'=>$admit]);
                     return  $pdf->setPaper('a4')->download("$admit->role_number.pdf");
                 }else{
@@ -167,11 +168,11 @@ class HomeController extends Controller
 
     public function gallery(){
         $galleryCategory = GalleryCategory::where('is_active','1')->orderBy('created_at','desc')->get();
-        return view('theme.gallery',compact('galleryCategory'));
+        return view('theme2.gallery',compact('galleryCategory'));
     }
 
     public function questionAnswer(){
         $questions = Question::where('is_active','1')->orderBy('created_at','desc')->get();
-        return view('theme.question_answer',compact('questions'));
+        return view('theme2.question_answer',compact('questions'));
     }
 }

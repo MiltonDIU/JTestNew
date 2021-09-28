@@ -100,6 +100,15 @@
                 </li>
             </ul>
         </li>
+
+        <li class="nav-item start ">
+            <a href="{{ url('/' . Config("authorization.route-prefix") . '/slider') }}"  >
+                <i class="icon-eye"></i>
+                <span class="title">Sliders</span>
+            </a>
+        </li>
+
+
         <li class="nav-item start ">
             <a href="{{ url('/' . Config("authorization.route-prefix") . '/question') }}"  >
                 <i class="icon-arrow-right"></i>
@@ -119,4 +128,3 @@
 
 @endif
 </ul>
-                
